@@ -1,0 +1,42 @@
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(79, 79, 79, 0.6);
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  align-items: center;
+}
+
+.modal-content {
+  position : relative;
+  background-color: rgb(197, 222, 255);
+  border: 2px solid rgb(38, 99, 179);
+  width: 90%;
+  max-width: 400px;
+  border-radius: 8px;
+  padding: 35px 20px;
+  animation: modal-content 1s;
+  max-height: 80vh;
+  /* min-height: 50vh; */
+  height: auto;
+
+
+}
+
+@keyframes modal-content {
+
+  0% {
+    opacity: 0;
+    scale: .5;
+  }
+
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}

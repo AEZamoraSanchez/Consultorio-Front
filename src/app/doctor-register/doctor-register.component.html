@@ -1,0 +1,22 @@
+<app-modal-register>
+  <h3>Registrar doctor</h3>
+  <form [formGroup]="doctorForm" (ngSubmit)="registrar()" >
+    <label for="nombre">Nombre:
+    </label>
+      <input type="text" formControlName="nombre" id="nombre">
+
+    <label for="apellidoPaterno">Apellido Paterno:
+    </label>
+      <input type="text" formControlName="apellidoPaterno" id="apellidoPaterno">
+
+    <label for="apellidoMaterno">Apellido Materno:
+    </label>
+    <input type="text" formControlName="apellidoMaterno" id="apellidoMaterno">
+
+    <label for="especialidad">Especialidad:
+    </label>
+      <input type="text" formControlName="especialidad" id="especialidad">
+
+    <button>Registrar</button>
+  </form>
+</app-modal-register>

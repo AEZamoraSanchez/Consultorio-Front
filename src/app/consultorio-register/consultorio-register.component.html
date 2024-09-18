@@ -1,0 +1,15 @@
+<app-modal-register>
+  <h3>Registrar Consultorio</h3>
+  <form [formGroup]="consultorioForm" (ngSubmit)="registrar()" >
+    <label for="numeroConsultorio">Numero de consultorio:
+    </label>
+      <input type="number" formControlName="numeroConsultorio" id="numeroConsultorio">
+
+    <label for="piso">Piso:
+    </label>
+      <input type="number" formControlName="piso" id="piso">
+
+
+    <button>Registrar</button>
+  </form>
+</app-modal-register>
