@@ -20,7 +20,7 @@
   max-width: 400px;
   border-radius: 8px;
   padding: 35px 20px;
-  animation: modal-content 1s;
+  animation: modal-content 0.85s;
   max-height: 80vh;
   /* min-height: 50vh; */
   height: auto;

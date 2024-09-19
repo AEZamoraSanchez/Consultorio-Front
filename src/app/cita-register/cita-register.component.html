@@ -1,4 +1,4 @@
-<app-modal-register>
+<app-modal-register (closeEvent)="closeModal()">
   <h3>Registrar Cita</h3>
   <form [formGroup]="citaForm" (ngSubmit)="registrar()" >
     <label for="horarioConsulta">Horario de Consulta:
@@ -21,8 +21,9 @@
     <label for="consultorio">Consultorio:
     </label>
       <select formControlName="consultorio" id="consultorio">
-        <option value="1">Consultorio 1</option>
-        <option value="2">Consultorio 2</option>
+        <option *ngFor="let consultorio of consultorios" [value]="consultorio.id">
+          {{ consultorio.numeroConsultorio }}
+        </option>
       </select>
 
     <button>Registrar</button>

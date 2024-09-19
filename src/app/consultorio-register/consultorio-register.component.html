@@ -1,4 +1,4 @@
-<app-modal-register>
+<app-modal-register (closeEvent)="closeModal()">
   <h3>Registrar Consultorio</h3>
   <form [formGroup]="consultorioForm" (ngSubmit)="registrar()" >
     <label for="numeroConsultorio">Numero de consultorio:

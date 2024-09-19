@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalRegisterComponent } from '../modal-register/modal-register.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { BackendService } from '../backend.service';
 
 @Component({
   selector: 'app-doctor-register',
@@ -15,10 +16,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class DoctorRegisterComponent{
 
+  @Output() closeModalEvent = new EventEmitter<void>();
+
   doctorForm : FormGroup
 
   constructor(
-    private form : FormBuilder
+    private form : FormBuilder,
+    private _backendService : BackendService
   ){
     this.doctorForm = this.form.group({
       nombre: ['', [Validators.required, Validators.maxLength(20)]],
@@ -28,8 +32,17 @@ export class DoctorRegisterComponent{
     })
   }
 
+  closeModal(){
+    this.closeModalEvent.emit()
+  }
+
   registrar(): void {
-    console.log(this.doctorForm.value);
+    this._backendService.createDoctor(this.doctorForm.value).
+    subscribe(doctor => {
+      console.log('Doctor creado correctamente');
+      this.closeModal()
+    },
+    error => console.error(error));
   }
 
 }

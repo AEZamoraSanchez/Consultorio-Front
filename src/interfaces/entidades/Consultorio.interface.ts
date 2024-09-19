@@ -1,6 +1,6 @@
 
 export interface Consultorio {
-  id: number;
+  id ? : number;
   numeroConsultorio: number;
   piso: number;
 }

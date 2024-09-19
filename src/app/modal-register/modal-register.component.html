@@ -1,4 +1,4 @@
-<div class="modal-container">
+<div class="modal-container"(click)="closeModal()">
   <div (click)="$event.stopPropagation()" class="modal-content">
     <ng-content></ng-content>
   </div>

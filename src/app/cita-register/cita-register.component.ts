@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalRegisterComponent } from '../modal-register/modal-register.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Consultorio } from '../../interfaces/entidades/Consultorio.interface';
 import { Doctor } from '../../interfaces/entidades/Doctor.interface';
 import { BackendService } from '../backend.service';
 import { CommonModule } from '@angular/common';
+import { Cita, CitaDTO } from '../../interfaces/entidades/Cita.interface';
 
 @Component({
   selector: 'app-cita-register',
@@ -17,6 +18,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './cita-register.component.css'
 })
 export class CitaRegisterComponent implements OnInit{
+
+  @Output() closeModalEvent = new EventEmitter<void>();
 
   citaForm : FormGroup;
   consultorios : Consultorio[] = [];
@@ -49,7 +52,7 @@ export class CitaRegisterComponent implements OnInit{
   }
 
   registrar(): void {
-    const newCita = {
+    const newCita : CitaDTO = {
       horarioConsulta: this.citaForm.value.horarioConsulta,
       nombrePaciente: this.citaForm.value.nombrePaciente,
       doctor: {
@@ -60,8 +63,14 @@ export class CitaRegisterComponent implements OnInit{
       }
     }
 
-    console.log(newCita)
-    console.log(this.consultorios)
-    console.log(this.doctores)
+    this._backendService.createCita(newCita).
+    subscribe(cita => {
+      console.log("Cita creada correctamente");
+    },
+  error => console.error(error))
+  }
+
+  closeModal(){
+    this.closeModalEvent.emit()
   }
 }
