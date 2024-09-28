@@ -1,5 +1,5 @@
 
-
+<button (click)="show()">show</button>
 <main>
   <div class="div-content">
     <section>
@@ -21,14 +21,14 @@
     </section>
     <section>
       <h2>Citas Agendadas</h2>
-      <div>
-        <p *ngFor="let cita of citas">
+      <div class="div-citas">
+        <p *ngFor="let cita of citas.slice(0, 6)">
           {{ cita.nombrePaciente }} - {{ cita.horarioConsulta | date: 'yyyy-MM-dd HH:mm' }}
         </p>
       </div>
       <div class="div-arrows">
-        <button (click)="downPage()">◀</button>
-        <button (click)="upPage()">▶</button>
+        <button (click)="downPage()" [disabled]="page() === 0">◀</button>
+        <button (click)="upPage()" [disabled]="last()">▶</button>
       </div>
     </section>
   </div>

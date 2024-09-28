@@ -4,10 +4,19 @@
     <label for="horarioConsulta">Horario de Consulta:
     </label>
       <input type="datetime-local" formControlName="horarioConsulta" id="horarioConsulta">
+      <p *ngIf="hasErrors('horarioConsulta', 'required')">
+        Campo requerido.
+      </p>
 
     <label for="nombrePaciente">Nombre del Paciente
     </label>
       <input type="text" formControlName="nombrePaciente" id="nombrePaciente">
+      <p *ngIf="hasErrors('nombrePaciente', 'required')">
+        Campo requerido.
+      </p>
+      <p *ngIf="hasErrors('nombrePaciente', 'maxlength')">
+        El nombre del paciente no debe tener más de 20 caracteres.
+      </p>
 
     <label for="doctor">Doctor:
     </label>
@@ -17,6 +26,9 @@
       </option>
 
     </select>
+    <p *ngIf="hasErrors('doctor', 'required')">
+      Campo requerido.
+    </p>
 
     <label for="consultorio">Consultorio:
     </label>
@@ -25,6 +37,9 @@
           {{ consultorio.numeroConsultorio }}
         </option>
       </select>
+      <p *ngIf="hasErrors('consultorio', 'required')">
+        Campo requerido.
+      </p>
 
     <button>Registrar</button>
   </form>

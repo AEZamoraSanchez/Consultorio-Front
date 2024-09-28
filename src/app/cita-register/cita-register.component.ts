@@ -31,7 +31,7 @@ export class CitaRegisterComponent implements OnInit{
   ) {
     this.citaForm = this.form.group({
       horarioConsulta: ['', [Validators.required]],
-      nombrePaciente: ['', [Validators.required]],
+      nombrePaciente: ['', [Validators.required, Validators.maxLength(20)]],
       doctor: ['', [Validators.required]],
       consultorio: ['', [Validators.required]],
     });
@@ -52,6 +52,12 @@ export class CitaRegisterComponent implements OnInit{
   }
 
   registrar(): void {
+
+    if( !this.citaForm.valid){
+      this.citaForm.markAllAsTouched()
+      return;
+    }
+
     const newCita : CitaDTO = {
       horarioConsulta: this.citaForm.value.horarioConsulta,
       nombrePaciente: this.citaForm.value.nombrePaciente,
@@ -66,6 +72,7 @@ export class CitaRegisterComponent implements OnInit{
     this._backendService.createCita(newCita).
     subscribe(cita => {
       console.log("Cita creada correctamente");
+      this.closeModal();
     },
   error => console.error(error))
   }
@@ -73,4 +80,9 @@ export class CitaRegisterComponent implements OnInit{
   closeModal(){
     this.closeModalEvent.emit()
   }
+
+  hasErrors( controlName : string, errorType : string) {
+    return this.citaForm.get(controlName)?.hasError(errorType) && this.citaForm.get(controlName)?.touched
+  }
+
 }

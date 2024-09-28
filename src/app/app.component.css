@@ -27,6 +27,14 @@ main {
   margin: 10vh auto;
 }
 
+.div-citas {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  height: 300px;
+  overflow: auto;
+}
+
 h2{
   text-align: center;
 }
@@ -65,6 +73,15 @@ p {
   /* background-color: aqua; */
   padding: 5px 10px;
   border-radius: 5px;
-  margin: 10px 0;
+  margin: 0;
   border: solid 2px black;
+  cursor: pointer;
+
+  &:hover{
+    background-color: #959595;
+    color:aliceblue;
+    /* scale: 1.1; */
+    transition: background-color .7s ease-in-out;
+    transition: color .5s;
+  }
 }

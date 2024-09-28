@@ -34,7 +34,6 @@ export class BackendService {
     return this.http.get<AllCitas>(`${this.urlBackend}/cita/all/${page}`);
   }
   public createCita(cita : CitaDTO) : Observable<CitaResponse>{
-    console.log(cita)
     return this.http.post<CitaResponse>(`${this.urlBackend}/cita`, cita);
   }
 

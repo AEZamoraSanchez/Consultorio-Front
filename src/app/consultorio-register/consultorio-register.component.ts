@@ -2,11 +2,15 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalRegisterComponent } from '../modal-register/modal-register.component';
 import { BackendService } from '../backend.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-consultorio-register',
   standalone: true,
-  imports: [ModalRegisterComponent, ReactiveFormsModule],
+  imports: [
+    ModalRegisterComponent, ReactiveFormsModule,
+    CommonModule
+  ],
   templateUrl: './consultorio-register.component.html',
   styleUrl: './consultorio-register.component.css'
 })
@@ -30,12 +34,21 @@ export class ConsultorioRegisterComponent {
   }
 
    registrar(): void {
+    if(!this.consultorioForm.valid){
+      this.consultorioForm.markAllAsTouched()
+      // console.log(this.consultorioForm)
+      return
+    }
     this._backendService.createConsultorio(this.consultorioForm.value).
     subscribe(consultorio => {
       console.log("Consultorio creado correctamente")
       this.closeModal();
     },
    error => console.error(error)  );
+  }
+
+  hasErrors( controlName : string, errorType : string) {
+    return this.consultorioForm.get(controlName)?.hasError(errorType) && this.consultorioForm.get(controlName)?.touched
   }
 
 }

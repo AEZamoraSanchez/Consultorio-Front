@@ -4,11 +4,27 @@
     <label for="numeroConsultorio">Numero de consultorio:
     </label>
       <input type="number" formControlName="numeroConsultorio" id="numeroConsultorio">
-
+      <p *ngIf="hasErrors('numeroConsultorio', 'required')">
+        Campo requerido.
+      </p>
+      <p *ngIf="hasErrors('numeroConsultorio', 'min')">
+        Numero de consultorio debe ser minimo 1.
+      </p>
+      <p *ngIf="hasErrors('numeroConsultorio', 'max')">
+        Numero de consultorio debe ser maximo 100.
+      </p>
     <label for="piso">Piso:
     </label>
       <input type="number" formControlName="piso" id="piso">
-
+      <p *ngIf="hasErrors('piso', 'required')">
+        Campo requerido.
+      </p>
+      <p *ngIf="hasErrors('piso', 'min')">
+        Numero de consultorio debe ser minimo 1.
+      </p>
+      <p *ngIf="hasErrors('piso', 'max')">
+        Numero de consultorio debe ser maximo 100.
+      </p>
 
     <button>Registrar</button>
   </form>

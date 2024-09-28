@@ -4,18 +4,42 @@
     <label for="nombre">Nombre:
     </label>
       <input type="text" formControlName="nombre" id="nombre">
+      <p *ngIf="hasErrors('nombre', 'required')">
+        Campo requerido.
+      </p>
+      <p *ngIf="hasErrors('nombre', 'maxlength')">
+        Nombre del doctor debe tener maximo 20 caracteres.
+      </p>
 
     <label for="apellidoPaterno">Apellido Paterno:
     </label>
       <input type="text" formControlName="apellidoPaterno" id="apellidoPaterno">
+      <p *ngIf="hasErrors('apellidoPaterno', 'required')">
+        Campo requerido.
+      </p>
+      <p *ngIf="hasErrors('apellidoPaterno', 'maxlength')">
+        Apellidop Paterno del doctor debe tener maximo 20 caracteres.
+      </p>
 
     <label for="apellidoMaterno">Apellido Materno:
     </label>
     <input type="text" formControlName="apellidoMaterno" id="apellidoMaterno">
+    <p *ngIf="hasErrors('apellidoMaterno', 'required')">
+      Campo requerido.
+    </p>
+    <p *ngIf="hasErrors('apellidoMaterno', 'maxlength')">
+      Apellidop Materno del doctor debe tener maximo 20 caracteres.
+    </p>
 
     <label for="especialidad">Especialidad:
     </label>
       <input type="text" formControlName="especialidad" id="especialidad">
+      <p *ngIf="hasErrors('especialidad', 'required')">
+        Campo requerido.
+      </p>
+      <p *ngIf="hasErrors('especialidad', 'maxlength')">
+        Especialidad del doctor debe tener maximo 20 caracteres.
+      </p>
 
     <button>Registrar</button>
   </form>

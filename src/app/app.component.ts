@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   ){}
 
   page = signal(0)
+  last = signal(false)
   citas : CitaResponse[] = []
 
   receivedBoolean : string = "";
@@ -63,6 +64,7 @@ export class AppComponent implements OnInit {
     this._backendService.getCitas(this.page()).
     subscribe(citas => {
       this.citas = citas.content;
+      this.last.set(citas.last);
     },
     error => console.error(error));
   }
@@ -72,7 +74,15 @@ export class AppComponent implements OnInit {
     this._backendService.getCitas(this.page()).
     subscribe(citas => {
       this.citas = citas.content;
+      this.last.set(citas.last);
+
     },
     error => console.error(error));
   }
+
+  show(){
+    console.log(this.page());
+    console.log(this.last());
+  }
+
 }
