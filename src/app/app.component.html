@@ -22,7 +22,7 @@
     <section>
       <h2>Citas Agendadas</h2>
       <div class="div-citas">
-        <p *ngFor="let cita of citas.slice(0, 6)">
+        <p *ngFor="let cita of citas.slice(0, 6)" (click)="showModalRegister('cita-view', cita.id)">
           {{ cita.nombrePaciente }} - {{ cita.horarioConsulta | date: 'yyyy-MM-dd HH:mm' }}
         </p>
       </div>
@@ -36,6 +36,7 @@
   <app-cita-register (closeModalEvent)="receiveBoolean()" *ngIf="registerCita()"/>
   <app-consultorio-register (closeModalEvent)="receiveBoolean()" *ngIf="registerConsultorio()"/>
   <app-doctor-register (closeModalEvent)="receiveBoolean()" *ngIf="registerDoctor()"/>
+  <app-cita-view (closeModalEvent)="receiveBoolean()" *ngIf="citaView()" [citaId]="citaId()"/>
 
 </main>
 

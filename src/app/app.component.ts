@@ -6,6 +6,7 @@ import { DoctorRegisterComponent } from './doctor-register/doctor-register.compo
 import { CommonModule } from '@angular/common';
 import { CitaResponse } from '../interfaces/entidades/Cita.interface';
 import { BackendService } from './backend.service';
+import { CitaViewComponent } from './cita-view/cita-view.component';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ import { BackendService } from './backend.service';
     CitaRegisterComponent,
     ConsultorioRegisterComponent,
     DoctorRegisterComponent,
+    CitaViewComponent,
     CommonModule
   ],
   templateUrl: './app.component.html',
@@ -36,6 +38,9 @@ export class AppComponent implements OnInit {
   registerConsultorio =  signal(false)
   registerDoctor =  signal(false)
 
+  citaView =  signal(false)
+  citaId = signal(0)
+
   title = 'consultorio-front';
 
   ngOnInit(): void {
@@ -46,17 +51,22 @@ export class AppComponent implements OnInit {
     error => console.error(error));
   }
 
-  showModalRegister(type : string){
-
+  showModalRegister(type : string, citaId ?: number){
+    console.log(citaId)
     type === "cita" && this.registerCita.set(true);
     type === "consultorio" && this.registerConsultorio.set(true)
     type === "doctor" && this.registerDoctor.set(true)
+    if(type === "cita-view"){
+      citaId && this.citaId.set(citaId)
+      this.citaView.set(true)
+    }
   }
 
   receiveBoolean (){
     this.registerCita.set(false)
     this.registerConsultorio.set(false)
     this.registerDoctor.set(false)
+    this.citaView.set(false)
   }
 
   upPage() {

@@ -30,6 +30,9 @@ export class BackendService {
   public createConsultorio(consultorio : Consultorio) : Observable<Consultorio>{
     return this.http.post<Consultorio>(`${this.urlBackend}/consultorio`, consultorio);
   }
+  public getCitaById (citaId : number) : Observable<CitaResponse>{
+    return this.http.get<CitaResponse>(`${this.urlBackend}/cita/${citaId}`);
+  }
   public getCitas(page : number) : Observable<AllCitas>{
     return this.http.get<AllCitas>(`${this.urlBackend}/cita/all/${page}`);
   }
