@@ -6,6 +6,8 @@ import { Doctor } from '../../interfaces/entidades/Doctor.interface';
 import { BackendService } from '../backend.service';
 import { CommonModule } from '@angular/common';
 import { Cita, CitaDTO } from '../../interfaces/entidades/Cita.interface';
+import { ToastrService } from 'ngx-toastr';
+import { ErrorResponse } from '../../interfaces/errorResponse.interface';
 
 @Component({
   selector: 'app-cita-register',
@@ -27,7 +29,8 @@ export class CitaRegisterComponent implements OnInit{
 
   constructor(
     private form : FormBuilder,
-    private _backendService : BackendService
+    private _backendService : BackendService,
+    private toastr : ToastrService
   ) {
     this.citaForm = this.form.group({
       horarioConsulta: ['', [Validators.required]],
@@ -71,10 +74,14 @@ export class CitaRegisterComponent implements OnInit{
 
     this._backendService.createCita(newCita).
     subscribe(cita => {
-      console.log("Cita creada correctamente");
-      this.closeModal();
+      this.toastr.success("Cita creada correctamente");
+      setTimeout(() => {
+        this.closeModal();
+      }, 800);
     },
-  error => console.error(error))
+  (error : ErrorResponse) =>{
+     this.toastr.error(error.error.message)
+  })
   }
 
   closeModal(){

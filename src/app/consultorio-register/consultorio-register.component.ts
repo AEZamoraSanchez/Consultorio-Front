@@ -3,12 +3,14 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ModalRegisterComponent } from '../modal-register/modal-register.component';
 import { BackendService } from '../backend.service';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-consultorio-register',
   standalone: true,
   imports: [
-    ModalRegisterComponent, ReactiveFormsModule,
+    ModalRegisterComponent,
+    ReactiveFormsModule,
     CommonModule
   ],
   templateUrl: './consultorio-register.component.html',
@@ -21,7 +23,8 @@ export class ConsultorioRegisterComponent {
 
   constructor(
     private form : FormBuilder,
-    private _backendService : BackendService
+    private _backendService : BackendService,
+    private toastr : ToastrService
   ) {
     this.consultorioForm = this.form.group({
       numeroConsultorio: ['', [Validators.required, Validators.min(1), Validators.max(100)], ],
@@ -31,6 +34,7 @@ export class ConsultorioRegisterComponent {
 
    closeModal(){
     this.closeModalEvent.emit()
+    this.toastr.clear()
   }
 
    registrar(): void {
@@ -41,10 +45,13 @@ export class ConsultorioRegisterComponent {
     }
     this._backendService.createConsultorio(this.consultorioForm.value).
     subscribe(consultorio => {
-      console.log("Consultorio creado correctamente")
-      this.closeModal();
+      this.toastr.success("Consultorio creado")
+
+      setTimeout(() => {
+        this.closeModal();
+      }, 800);
     },
-   error => console.error(error)  );
+   error => this.toastr.error("No se pudo crear el consultorio")  );
   }
 
   hasErrors( controlName : string, errorType : string) {

@@ -3,6 +3,7 @@ import { ModalRegisterComponent } from '../modal-register/modal-register.compone
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BackendService } from '../backend.service';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-doctor-register',
@@ -23,7 +24,8 @@ export class DoctorRegisterComponent{
 
   constructor(
     private form : FormBuilder,
-    private _backendService : BackendService
+    private _backendService : BackendService,
+    private toastr : ToastrService
   ){
     this.doctorForm = this.form.group({
       nombre: ['', [Validators.required, Validators.maxLength(20)]],
@@ -35,6 +37,7 @@ export class DoctorRegisterComponent{
 
   closeModal(){
     this.closeModalEvent.emit()
+    this.toastr.clear()
   }
 
   registrar(): void {
@@ -46,8 +49,10 @@ export class DoctorRegisterComponent{
 
     this._backendService.createDoctor(this.doctorForm.value).
     subscribe(doctor => {
-      console.log('Doctor creado correctamente');
-      this.closeModal()
+      this.toastr.success('Doctor creado correctamente');
+      setTimeout(() => {
+        this.closeModal()
+      }, 800);
     },
     error => console.error(error));
   }
