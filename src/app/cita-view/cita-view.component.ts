@@ -29,7 +29,6 @@ export class CitaViewComponent implements OnInit {
     this._backendService.getCitaById(this.citaId).
     subscribe(cita => {
       this.cita = cita;
-      console.log(cita)
     },
     error => console.error(error))
   }

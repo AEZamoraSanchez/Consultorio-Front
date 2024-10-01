@@ -1,5 +1,32 @@
 <app-modal-register (closeEvent)="closeModal()">
 
-  <h1>{{ citaId }}</h1>
+  <section>
+    <h4>Datos del Paciente</h4>
+    <p><strong>Nombre:</strong> {{ cita?.nombrePaciente }}</p>
+
+    <p><strong>Fecha de la cita:</strong>
+      {{ cita?.horarioConsulta | date: 'yyyy-MM-dd HH:mm' }}
+    </p>
+  </section>
+
+  <section>
+    <h4>Datos del Doctor</h4>
+    <p><strong>Nombre del doctor:</strong>
+      {{ cita?.doctor?.nombre }} {{ cita?.doctor?.apellidoPaterno }} {{ cita?.doctor?.apellidoMaterno }}
+    </p>
+    <p><strong>Especialidad:</strong>
+      {{ cita?.doctor?.especialidad }}
+    </p>
+  </section>
+
+  <section>
+    <h4>Datos del Consultorio</h4>
+    <p><strong>Número de consultorio:</strong>
+      {{ cita?.consultorio?.numeroConsultorio }}
+    </p>
+    <p><strong>Número de piso:</strong>
+      {{ cita?.consultorio?.piso }}
+    </p>
+  </section>
 
 </app-modal-register>
