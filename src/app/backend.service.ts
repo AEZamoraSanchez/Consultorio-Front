@@ -4,13 +4,14 @@ import { Doctor } from '../interfaces/entidades/Doctor.interface';
 import { Observable } from 'rxjs';
 import { Consultorio } from '../interfaces/entidades/Consultorio.interface';
 import { AllCitas, Cita, CitaDTO, CitaResponse } from '../interfaces/entidades/Cita.interface';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
 
-  private urlBackend = "http://localhost:8080";
+  private urlBackend = environment.backendUrl;
 
   constructor(
     private http : HttpClient
