@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendUrl: ""
+  backendUrl: "https://consultorio-back-production-be94.up.railway.app/"
 };
