@@ -47,6 +47,7 @@ export class AppComponent implements OnInit {
     this._backendService.getCitas(this.page()).
     subscribe(citas => {
       this.citas = citas.content;
+      this.last.set(citas.last);
     },
     error => console.error(error));
   }
